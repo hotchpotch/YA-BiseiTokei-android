@@ -84,7 +84,7 @@ public class ImageLoader extends View {
 
     private String getPhotoPath() {
         Calendar cal = Calendar.getInstance();
-        return String.format("%sPhotos/%2d%2d.jpg", 
+        return String.format("%sPhotos/%02d%02d.jpg", 
                 BISEI_APP_DIR, 
                 cal.get(Calendar.HOUR_OF_DAY),
                 cal.get(Calendar.MINUTE)
