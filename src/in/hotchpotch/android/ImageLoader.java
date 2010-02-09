@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.io.IOException;
 
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 
@@ -17,33 +19,63 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 
+import android.os.Handler;
+
 import android.util.Log;
 
 import android.view.View;
 
 public class ImageLoader extends View {
+    private static final String TAG = "ImageLoader";
     private Bitmap image;
     private String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
+    private String lastPhotoPath = null;
     
     public ImageLoader(Context context) {
         super(context);
         setBackgroundColor(Color.BLACK);
         // Resources r = context.getResources();
-        InputStream fis = null;
-        try {
-            String str = this.getPhotoPath();
-            // File file = new File(str);
-            // Log.i("a", String.format("%b", file.canRead()));
-            fis = new BufferedInputStream(new FileInputStream(str));
-            image = BitmapFactory.decodeStream(fis);
-        } catch (Exception e) {
-            Log.e("erro file", e.getMessage(), e);
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    Log.e("erro file", e.getMessage(), e);
+        updateImage();
+        startTimer();
+    }
+
+    private void startTimer() {
+        Timer timer = new Timer(true);
+        final Handler handler = new Handler();
+        timer.schedule(
+            new TimerTask() {
+                @Override
+                public void run() {
+                    handler.post( new Runnable(){
+                        public void run(){
+                            // Log.d(TAG, "update image");
+                            ImageLoader.this.updateImage();
+                        }
+                    });
+                }
+            }, 0, 1000);
+    }
+
+    private void updateImage() {
+        String str = this.getPhotoPath();
+        // Log.d(TAG, str);
+        if (!str.equals(lastPhotoPath)) {
+            // Log.d(TAG, "UPDATTTTTTTTTTTTTT");
+            lastPhotoPath = str;
+            InputStream fis = null;
+            try {
+                fis = new BufferedInputStream(new FileInputStream(str));
+                image = BitmapFactory.decodeStream(fis);
+                this.invalidate();
+            } catch (IOException e) {
+                Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
+                    }
                 }
             }
         }
