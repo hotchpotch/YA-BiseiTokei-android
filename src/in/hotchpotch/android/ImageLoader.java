@@ -6,16 +6,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 
-import java.util.Calendar;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.content.Context;
 
@@ -24,8 +16,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
-import android.os.Handler;
-import android.os.Message;
 
 import android.util.Log;
 
@@ -35,26 +25,14 @@ public class ImageLoader extends View {
     private static final String TAG = "ImageLoader";
     private Bitmap mImage;
     private String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
-    private String mLastPhotoPath = null;
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     
     public ImageLoader(Context context) {
         super(context);
         setBackgroundColor(Color.BLACK);
-        startTimer();
     }
 
-    private void startTimer() {
-        Timer timer = new Timer(true);
-        Handler handler = new Handler() {
-            public void handleMessage(Message msg) {
-                ImageLoader.this.updateImage((String) msg.obj);
-            }
-        };
-        timer.schedule(new ImageUpdateTask(handler), 0, 1000);
-    }
-
-    private void updateImage(String time) {
+    public void updateImage(String time) {
         mImage = null;
         final String path = getPhotoPath(time);
         mExecutor.execute(new Runnable() { public void run() {
