@@ -22,22 +22,35 @@ import android.view.WindowManager;
 
 public class YABiseiTokei extends Activity {
     private ImageLoader mImageLoader;
+    private Timer timer;
     public static String TAG = "YABiseiTokei";
     public static String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle iCicle) {
+        super.onCreate(iCicle);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);     
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // setContentView(R.layout.main);
         mImageLoader = new ImageLoader(this);
         setContentView(mImageLoader);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
         startTimer();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        timerCancel();
+    }
+
     private void startTimer() {
-        Timer timer = new Timer(true);
+        timerCancel();
+        timer = new Timer(true);
         Handler handler = new Handler() {
             public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
@@ -47,6 +60,13 @@ public class YABiseiTokei extends Activity {
             }
         };
         timer.schedule(new ImageUpdateTask(handler), 0, 1000);
+    }
+
+    private void timerCancel() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        };
     }
 
     private void playVoice(String time) {
