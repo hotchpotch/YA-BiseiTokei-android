@@ -2,5 +2,5 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">YABiseiTokei</string>
-<string name="dir_not_found">Dir %s not found.</string>
+    <string name="dir_not_found">ディレクトリ %s が見つかりません。</string>
 </resources>

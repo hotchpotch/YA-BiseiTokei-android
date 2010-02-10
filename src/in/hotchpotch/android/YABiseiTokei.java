@@ -6,6 +6,9 @@ import java.io.File;
 import java.util.Timer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+
+import android.content.DialogInterface;
 
 import android.media.MediaPlayer;
 
@@ -23,6 +26,7 @@ import android.view.WindowManager;
 public class YABiseiTokei extends Activity {
     private ImageLoader mImageLoader;
     private Timer timer;
+    private boolean dirExists;
     public static String TAG = "YABiseiTokei";
     public static String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
 
@@ -31,15 +35,30 @@ public class YABiseiTokei extends Activity {
         super.onCreate(iCicle);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);     
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        // setContentView(R.layout.main);
-        mImageLoader = new ImageLoader(this);
-        setContentView(mImageLoader);
+        dirExists = (new File(BISEI_APP_DIR)).exists();
+        if (dirExists) {
+            // setContentView(R.layout.main);
+            mImageLoader = new ImageLoader(this);
+            setContentView(mImageLoader);
+        } else {
+            new AlertDialog.Builder(this)
+               .setMessage(String.format(getString(R.string.dir_not_found), BISEI_APP_DIR))
+               .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        YABiseiTokei.this.finish();
+                    }
+            })
+            .create()
+            .show();
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        startTimer();
+        if (dirExists) {
+            startTimer();
+        }
     }
 
     @Override
