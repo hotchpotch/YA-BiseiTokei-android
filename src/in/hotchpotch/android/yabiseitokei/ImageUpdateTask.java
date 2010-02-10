@@ -1,4 +1,4 @@
-package in.hotchpotch.android;
+package in.hotchpotch.android.yabiseitokei;
 
 import java.util.Calendar;
 import java.util.TimerTask;

@@ -1,5 +1,5 @@
 
-package in.hotchpotch.android;
+package in.hotchpotch.android.yabiseitokei;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
