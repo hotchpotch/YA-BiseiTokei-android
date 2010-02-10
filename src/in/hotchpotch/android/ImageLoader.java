@@ -68,7 +68,33 @@ public class ImageLoader extends View {
         if (!str.equals(mLastPhotoPath)) {
             // Log.d(TAG, "UPDATTTTTTTTTTTTTT");
             mLastPhotoPath = str;
-            invalidate();
+            mImage = null;
+            mExecutor.execute(new Runnable() { public void run() {
+                    if (Thread.interrupted()) {
+                        return;
+                    }
+                    InputStream fis = null;
+                    try {
+                        fis = new BufferedInputStream(new FileInputStream(mLastPhotoPath));
+                        mImage = BitmapFactory.decodeStream(fis);
+                        post(new Runnable() { 
+                            public void run() {
+                                invalidate();
+                            }
+                        });
+                    } catch (IOException e) {
+                        Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
+                    } finally {
+                        if (fis != null) {
+                            try {
+                                fis.close();
+                            } catch (IOException e) {
+                                Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
+                            }
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -83,37 +109,9 @@ public class ImageLoader extends View {
 
   @Override
       protected void onDraw(final Canvas canvas) {
-          mExecutor.execute(new Runnable() { public void run() {
-                  if (Thread.interrupted()) {
-                      return;
-                  }
-                  InputStream fis = null;
-                  try {
-                      fis = new BufferedInputStream(new FileInputStream(mLastPhotoPath));
-                      final Bitmap image = BitmapFactory.decodeStream(fis);
-                      post(new Runnable() { 
-                          public void run() {
-                              canvas.drawBitmap(image,0,0,null);
-                          }
-                      });
-                  } catch (IOException e) {
-                      Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
-                  } finally {
-                      if (fis != null) {
-                          try {
-                              fis.close();
-                          } catch (IOException e) {
-                              Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
-                          }
-                      }
-                  }
-              }
-          });
-          // int w = mImage.getWidth();
-          // int h = mImage.getHeight();
-          // Rect src = new Rect(0,0,w,h);
-          // Rect dst = new Rect(0,200,w/2,200+h/2);
-          // canvas.drawBitmap(mImage, src, dst, null);
+          if (mImage != null) {
+              canvas.drawBitmap(mImage,0,0,null);
+          }
       }
 }
 
