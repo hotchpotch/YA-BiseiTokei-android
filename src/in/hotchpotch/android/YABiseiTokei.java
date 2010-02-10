@@ -43,7 +43,7 @@ public class YABiseiTokei extends Activity {
                 String time = (String) msg.obj;
                 Log.i(TAG, String.format("updateHandler - %s", time));
                 mImageLoader.updateImage(time);
-                YABiseiTokei.this.playVoice(time);
+                playVoice(time);
             }
         };
         timer.schedule(new ImageUpdateTask(handler), 0, 1000);
