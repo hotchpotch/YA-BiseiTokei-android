@@ -24,7 +24,6 @@ import android.view.View;
 public class ImageLoader extends View {
     private static final String TAG = "ImageLoader";
     private Bitmap mImage;
-    private String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     
     public ImageLoader(Context context) {
@@ -64,7 +63,7 @@ public class ImageLoader extends View {
     }
 
     private String getPhotoPath(String time) {
-        return String.format("%sPhotos/%s.jpg", BISEI_APP_DIR, time);
+        return String.format("%sPhotos/%s.jpg", YABiseiTokei.BISEI_APP_DIR, time);
     }
 
   @Override
