@@ -3,15 +3,11 @@ package in.hotchpotch.android;
 
 import java.io.File;
 
-import java.net.URI;
-
 import java.util.Timer;
 
 import android.app.Activity;
 
 import android.media.MediaPlayer;
-
-import android.media.MediaPlayer.OnCompletionListener;
 
 import android.net.Uri;
 
@@ -26,6 +22,7 @@ import android.view.WindowManager;
 
 public class YABiseiTokei extends Activity {
     private ImageLoader mImageLoader;
+    public static String TAG = "YABiseiTokei";
     public static String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
 
     @Override
@@ -44,6 +41,7 @@ public class YABiseiTokei extends Activity {
         Handler handler = new Handler() {
             public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
+                Log.i(TAG, String.format("updateHandler - %s", time));
                 mImageLoader.updateImage(time);
                 YABiseiTokei.this.playVoice(time);
             }
@@ -53,7 +51,6 @@ public class YABiseiTokei extends Activity {
 
     private void playVoice(String time) {
         File file = new File(String.format("%sSounds/Time/%s.mp3", YABiseiTokei.BISEI_APP_DIR, time));
-        Log.i("a", String.format("%b - %s", file.canRead(), file.toString()));
         Uri uri = Uri.parse(file.toURI().toString());
         MediaPlayer mp = MediaPlayer.create(this, uri);
         mp.start();
