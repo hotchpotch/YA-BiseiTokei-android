@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 
 import android.media.MediaPlayer;
 
@@ -20,6 +21,9 @@ import android.os.Message;
 
 import android.util.Log;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -54,6 +58,24 @@ public class YABiseiTokei extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        new MenuInflater(this).inflate(R.menu.main_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.main_menu_settings:
+            startActivity(new Intent(this, Settings.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         if (dirExists) {
@@ -74,7 +96,8 @@ public class YABiseiTokei extends Activity {
             @Override
 			public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
-                Log.i(TAG, String.format("updateHandler - %s", time));
+                int actId = Utils.detectAct(time);
+                Log.i(TAG, String.format("update - %d - %s - %s", actId, getResources().getStringArray( R.array.acts )[actId], time));
                 mImageLoader.updateImage(time);
                 playVoice(time);
             }

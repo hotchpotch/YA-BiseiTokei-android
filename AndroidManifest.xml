@@ -12,6 +12,12 @@
             </intent-filter>
         </activity>
 
+    <activity android:name=".Settings" android:screenOrientation="behind" android:configChanges="orientation|keyboardHidden">
+      <intent-filter>
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.ALTERNATIVE" />
+      </intent-filter>
+    </activity>
 
     </application>
     <uses-sdk android:minSdkVersion="4" />

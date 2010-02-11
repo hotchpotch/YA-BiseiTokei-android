@@ -4,6 +4,8 @@
     <string name="app_name">YABiseiTokei</string>
     <string name="dir_not_found">Dir %s not found.</string>
 
+    <string name="settings">Settings</string>
+
     <string name="ai_nonaka">Ai Nonaka</string>
     <string name="yuka_saitou">Yuka Saitou</string>
     <string name="tomoko_kaneda">Tomoko Kaneda</string>
