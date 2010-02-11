@@ -150,8 +150,9 @@ public class YABiseiTokei extends Activity {
         if (timetoneType == "none") {
             return;
         }
-        boolean serifTime = (Integer.parseInt(time) % 15 == 0) ? true : false;
+        boolean serifTime = (Integer.parseInt(time.substring(2, 4)) % 15 == 0) ? true : false;
 
+            Log.i(TAG, String.format("hogf - %b - %s", serifTime, timetoneType));
         if (serifTime && timetoneType.indexOf("serif") != -1) {
             Log.i(TAG, String.format("- %b - %s", serifTime, timetoneType));
             playSerif(time);
