@@ -14,4 +14,23 @@
 			android:dialogTitle="@string/time_tone"
 			android:entries="@array/prefs_timetones"
 			android:entryValues="@array/prefs_timetones_values" />
+
+      <PreferenceScreen
+           android:title="@string/sayyou"
+           android:summary="@string/sayyou_summary"
+           >
+          <!-- ID 直接書いていて大いにかっこわるいです... -->
+          <CheckBoxPreference android:key="sayyou_0" android:defaultValue="true" android:title="@string/ai_nonaka" />
+          <CheckBoxPreference android:key="sayyou_1" android:defaultValue="true" android:title="@string/yuka_saitou" />
+          <CheckBoxPreference android:key="sayyou_2" android:defaultValue="true" android:title="@string/tomoko_kaneda" />
+          <CheckBoxPreference android:key="sayyou_3" android:defaultValue="true" android:title="@string/yui_kano" />
+          <CheckBoxPreference android:key="sayyou_4" android:defaultValue="true" android:title="@string/ryouko_siraisi" />
+          <CheckBoxPreference android:key="sayyou_5" android:defaultValue="true" android:title="@string/satomi_satou" />
+          <CheckBoxPreference android:key="sayyou_6" android:defaultValue="true" android:title="@string/akemi_kanda" />
+          <CheckBoxPreference android:key="sayyou_7" android:defaultValue="true" android:title="@string/kanae_itou" />
+          <CheckBoxPreference android:key="sayyou_8" android:defaultValue="true" android:title="@string/houko_kuwashima" />
+          <CheckBoxPreference android:key="sayyou_9" android:defaultValue="true" android:title="@string/ryo_hirohashi" />
+          <CheckBoxPreference android:key="sayyou_10" android:defaultValue="true" android:title="@string/mai_aizawa" />
+          <CheckBoxPreference android:key="sayyou_11" android:defaultValue="true" android:title="@string/masumi_asano" />
+      </PreferenceScreen>
 </PreferenceScreen>

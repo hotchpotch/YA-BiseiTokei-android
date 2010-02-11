@@ -5,6 +5,7 @@
     <string name="dir_not_found">Dir %s not found.</string>
 
     <string name="sayyou">Voice Artists</string>
+    <string name="sayyou_summary">Voice Artists settings</string>
     <string name="settings">Settings</string>
     <string name="time_tone">Time Tone</string>
     <string name="time_tone_summary">Time tone settings</string>

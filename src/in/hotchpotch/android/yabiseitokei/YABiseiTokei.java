@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.content.SharedPreferences;
 
 import android.media.MediaPlayer;
@@ -128,10 +129,14 @@ public class YABiseiTokei extends Activity {
             @Override
 			public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
-                int actId = Utils.detectAct(time);
-                Log.i(TAG, String.format("update - %d - %s - %s", actId, getResources().getStringArray( R.array.acts )[actId], time));
                 mImageLoader.updateImage(time);
-                playVoice(time);
+
+                int actId = Utils.detectAct(time);
+                boolean say = mPrefs.getBoolean(String.format("sayyou_%d", actId), true);
+                Log.i(TAG, String.format("%s: ActID:%d Sayyou:%s Say?:%b", time, actId, getResources().getStringArray( R.array.acts )[actId], say));
+                if (say) {
+                    playVoice(time);
+                }
             }
         };
         timer.schedule(new ImageUpdateTask(handler), 0, 1000);
@@ -152,9 +157,8 @@ public class YABiseiTokei extends Activity {
         }
         boolean serifTime = (Integer.parseInt(time.substring(2, 4)) % 15 == 0) ? true : false;
 
-            Log.i(TAG, String.format("hogf - %b - %s", serifTime, timetoneType));
         if (serifTime && timetoneType.indexOf("serif") != -1) {
-            Log.i(TAG, String.format("- %b - %s", serifTime, timetoneType));
+            // Log.i(TAG, String.format("- %b - %s", serifTime, timetoneType));
             playSerif(time);
         } else {
             if (timetoneType.indexOf("every") != -1) {
