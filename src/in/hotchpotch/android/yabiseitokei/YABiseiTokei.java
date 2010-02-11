@@ -76,6 +76,9 @@ public class YABiseiTokei extends Activity {
         case R.id.main_menu_settings:
             startActivity(new Intent(this, Settings.class));
             return true;
+        case R.id.main_menu_timetone:
+            playTimeTone(Utils.getNowHHMM(), false);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -117,6 +120,7 @@ public class YABiseiTokei extends Activity {
         };
     }
 
+    // ToDo: 音声再生をキューに入れて直列に
     private void playVoice(String time) {
         String timetoneType = prefs.getString("time_tone", "serif_every");
         if (timetoneType == "none") {
