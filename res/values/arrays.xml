@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="acts">
+		<item>@string/ai_nonaka</item>
+		<item>@string/yuka_saitou</item>
+		<item>@string/tomoko_kaneda</item>
+		<item>@string/yui_kano</item>
+		<item>@string/ryouko_siraisi</item>
+		<item>@string/satomi_satou</item>
+		<item>@string/akemi_kanda</item>
+		<item>@string/kanae_itou</item>
+		<item>@string/houko_kuwashima</item>
+		<item>@string/ryo_hirohashi</item>
+		<item>@string/mai_aizawa</item>
+		<item>@string/masumi_asano</item>
+	</string-array>
+</resources>	

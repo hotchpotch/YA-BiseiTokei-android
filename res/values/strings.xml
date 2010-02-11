@@ -2,5 +2,18 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">YABiseiTokei</string>
-<string name="dir_not_found">Dir %s not found.</string>
+    <string name="dir_not_found">Dir %s not found.</string>
+
+    <string name="ai_nonaka">Ai Nonaka</string>
+    <string name="yuka_saitou">Yuka Saitou</string>
+    <string name="tomoko_kaneda">Tomoko Kaneda</string>
+    <string name="yui_kano">Yui Kano</string>
+    <string name="ryouko_siraisi">Ryouko Siraisi</string>
+    <string name="satomi_satou">Satomi Satou</string>
+    <string name="akemi_kanda">Akemi Kanda</string>
+    <string name="kanae_itou">Kanae Itou</string>
+    <string name="houko_kuwashima">Houko Kuwashima</string>
+    <string name="ryo_hirohashi">Ryo Hirohashi</string>
+    <string name="mai_aizawa">Mai Aizawa</string>
+    <string name="masumi_asano">Masumi Asano</string>
 </resources>
