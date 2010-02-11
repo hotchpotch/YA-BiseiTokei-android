@@ -3,4 +3,17 @@
     <string name="hello">Hello World!</string>
     <string name="app_name">YABiseiTokei</string>
     <string name="dir_not_found">ディレクトリ %s が見つかりません。</string>
+
+    <string name="ai_nonaka">野中藍</string>
+    <string name="yuka_saitou">斉藤佑圭</string>
+    <string name="tomoko_kaneda">金田朋子</string>
+    <string name="yui_kano">鹿野優以</string>
+    <string name="ryouko_siraisi">白石涼子</string>
+    <string name="satomi_satou">佐藤聡美</string>
+    <string name="akemi_kanda">神田朱未</string>
+    <string name="kanae_itou">伊藤かな恵</string>
+    <string name="houko_kuwashima">桑島法子</string>
+    <string name="ryo_hirohashi">広橋涼</string>
+    <string name="mai_aizawa">相沢舞</string>
+    <string name="masumi_asano">浅野真澄</string>
 </resources>

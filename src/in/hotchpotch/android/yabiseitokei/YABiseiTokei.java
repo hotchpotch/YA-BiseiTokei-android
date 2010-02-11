@@ -27,8 +27,8 @@ public class YABiseiTokei extends Activity {
     private ImageLoader mImageLoader;
     private Timer timer;
     private boolean dirExists;
-    public static String TAG = "YABiseiTokei";
-    public static String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
+    public static final String TAG = "YABiseiTokei";
+    public static final String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
 
     @Override
     public void onCreate(Bundle iCicle) {
@@ -71,7 +71,8 @@ public class YABiseiTokei extends Activity {
         timerCancel();
         timer = new Timer(true);
         Handler handler = new Handler() {
-            public void handleMessage(Message msg) {
+            @Override
+			public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
                 Log.i(TAG, String.format("updateHandler - %s", time));
                 mImageLoader.updateImage(time);

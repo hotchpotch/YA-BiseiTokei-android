@@ -12,6 +12,7 @@ public class ImageUpdateTask extends TimerTask {
 
     public ImageUpdateTask(Handler handler) {
         super();
+        
         updateHandler = handler;
     }
 
