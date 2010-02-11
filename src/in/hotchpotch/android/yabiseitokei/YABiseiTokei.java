@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 
 import android.preference.PreferenceManager;
 
@@ -31,17 +32,20 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class YABiseiTokei extends Activity {
+    public static final String TAG = "YABiseiTokei";
+    public static final String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
+
     private ImageLoader mImageLoader;
     private Timer timer;
     private boolean dirExists;
-    public static final String TAG = "YABiseiTokei";
-    public static final String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
-    private SharedPreferences prefs;
+
+    private SharedPreferences mPrefs;
+    private PowerManager.WakeLock mWakelock = null;
 
     @Override
     public void onCreate(Bundle iCicle) {
         super.onCreate(iCicle);
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);     
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         dirExists = (new File(BISEI_APP_DIR)).exists();
@@ -92,6 +96,23 @@ public class YABiseiTokei extends Activity {
     }
 
     @Override
+    public void onResume() {
+        PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+        mWakelock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, TAG);
+        mWakelock.acquire();
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        if (mWakelock != null) {
+            mWakelock.release();
+            mWakelock = null;
+        }
+        super.onPause();
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         timerCancel();
@@ -122,7 +143,7 @@ public class YABiseiTokei extends Activity {
 
     // ToDo: 音声再生をキューに入れて直列に
     private void playVoice(String time) {
-        String timetoneType = prefs.getString("time_tone", "serif_every");
+        String timetoneType = mPrefs.getString("time_tone", "serif_every");
         if (timetoneType == "none") {
             return;
         }
