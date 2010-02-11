@@ -97,9 +97,12 @@ public class YABiseiTokei extends Activity {
 
     @Override
     public void onResume() {
-        PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
-        mWakelock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, TAG);
-        mWakelock.acquire();
+        boolean wake = mPrefs.getBoolean("wakelock", true);
+        if (wake) {
+            PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+            mWakelock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, TAG);
+            mWakelock.acquire();
+        }
         super.onResume();
     }
 

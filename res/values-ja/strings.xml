@@ -8,6 +8,8 @@
     <string name="settings">設定</string>
     <string name="time_tone">時報</string>
     <string name="time_tone_summary">時報(音声)の設定です</string>
+    <string name="wakelock_title">スタンバイにしない</string>
+    <string name="wakelock_summary">アプリ起動中は、スタンバイに移行しません</string>
 
     <string name="prefs_timetone_serif_every">セリフ+毎分</string>
     <string name="prefs_timetone_serif">セリフのみ(15分おき)</string>
