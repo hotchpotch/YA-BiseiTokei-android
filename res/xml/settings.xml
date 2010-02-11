@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  		<ListPreference
+			android:key="time_tone"
+			android:defaultValue="serif_every"
+			android:title="@string/time_tone"
+			android:summary="@string/time_tone_summary"
+			android:dialogTitle="@string/time_tone"
+			android:entries="@array/prefs_timetones"
+			android:entryValues="@array/prefs_timetones_values" />
+</PreferenceScreen>

@@ -14,4 +14,18 @@
 		<item>@string/mai_aizawa</item>
 		<item>@string/masumi_asano</item>
 	</string-array>
+
+	<string-array name="prefs_timetones">
+		<item>@string/prefs_timetone_serif_every</item>
+		<item>@string/prefs_timetone_serif</item>
+		<item>@string/prefs_timetone_every</item>
+		<item>@string/prefs_timetone_none</item>
+	</string-array>
+
+	<string-array name="prefs_timetones_values">
+		<item>serif_every</item>
+		<item>serif</item>
+		<item>every</item>
+		<item>none</item>
+	</string-array>
 </resources>	

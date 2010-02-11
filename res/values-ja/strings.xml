@@ -4,7 +4,16 @@
     <string name="app_name">YABiseiTokei</string>
     <string name="dir_not_found">ディレクトリ %s が見つかりません。</string>
 
+    <string name="sayyou">声優</string>
     <string name="settings">設定</string>
+    <string name="time_tone">時報</string>
+    <string name="time_tone_summary">時報(音声)の設定です</string>
+
+    <string name="prefs_timetone_serif_every">セリフ+毎分</string>
+    <string name="prefs_timetone_serif">セリフのみ(15分おき)</string>
+    <string name="prefs_timetone_every">毎分</string>
+    <string name="prefs_timetone_none">無し</string>
+
 
     <string name="ai_nonaka">野中藍</string>
     <string name="yuka_saitou">斉藤佑圭</string>

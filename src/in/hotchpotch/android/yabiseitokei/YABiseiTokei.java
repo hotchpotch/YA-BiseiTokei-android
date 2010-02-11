@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
 import android.media.MediaPlayer;
 
@@ -18,6 +19,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import android.preference.PreferenceManager;
 
 import android.util.Log;
 
@@ -33,10 +36,12 @@ public class YABiseiTokei extends Activity {
     private boolean dirExists;
     public static final String TAG = "YABiseiTokei";
     public static final String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
+    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle iCicle) {
         super.onCreate(iCicle);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);     
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         dirExists = (new File(BISEI_APP_DIR)).exists();
@@ -113,9 +118,44 @@ public class YABiseiTokei extends Activity {
     }
 
     private void playVoice(String time) {
+        String timetoneType = prefs.getString("time_tone", "serif_every");
+        if (timetoneType == "none") {
+            return;
+        }
+        boolean serifTime = (Integer.parseInt(time) % 15 == 0) ? true : false;
+
+        if (serifTime && timetoneType.indexOf("serif") != -1) {
+            Log.i(TAG, String.format("- %b - %s", serifTime, timetoneType));
+            playSerif(time);
+        } else {
+            if (timetoneType.indexOf("every") != -1) {
+                playTimeTone(time, false);
+            }
+        }
+    }
+
+    private void playSerif(String time) {
+        File file = new File(String.format("%sSounds/Serif/%s.mp3", YABiseiTokei.BISEI_APP_DIR, time));
+        if (file.canRead()) {
+            Uri uri = Uri.parse(file.toURI().toString());
+            MediaPlayer mp = MediaPlayer.create(this, uri);
+            mp.start();
+        } else {
+            Log.e(TAG, String.format("serif file can't read! - %s", file.toString()));
+        }
+    }
+
+    private void playTimeTone(final String time, boolean withSerif) {
         File file = new File(String.format("%sSounds/Time/%s.mp3", YABiseiTokei.BISEI_APP_DIR, time));
         Uri uri = Uri.parse(file.toURI().toString());
         MediaPlayer mp = MediaPlayer.create(this, uri);
+        if (withSerif) {
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer _) {
+                    playSerif(time);
+                }
+            });
+        }
         mp.start();
     }
 }

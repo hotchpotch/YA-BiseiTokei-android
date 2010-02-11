@@ -4,7 +4,15 @@
     <string name="app_name">YABiseiTokei</string>
     <string name="dir_not_found">Dir %s not found.</string>
 
+    <string name="sayyou">Voice Artists</string>
     <string name="settings">Settings</string>
+    <string name="time_tone">Time Tone</string>
+    <string name="time_tone_summary">Time tone settings</string>
+
+    <string name="prefs_timetone_serif_every">All</string>
+    <string name="prefs_timetone_serif">Speech only (15min)</string>
+    <string name="prefs_timetone_every">Time tone(1min)</string>
+    <string name="prefs_timetone_none">None</string>
 
     <string name="ai_nonaka">Ai Nonaka</string>
     <string name="yuka_saitou">Yuka Saitou</string>
