@@ -21,10 +21,10 @@
 			android:entries="@array/prefs_timetones"
 			android:entryValues="@array/prefs_timetones_values" />
 
-      <PreferenceScreen
-           android:title="@string/sayyou"
-           android:summary="@string/sayyou_summary"
-           >
+    <PreferenceCategory 
+               android:title="@string/sayyou"
+               android:summary="@string/sayyou_summary"
+    >
           <!-- ID 直接書いていて大いにかっこわるいです... -->
           <CheckBoxPreference android:key="sayyou_0" android:defaultValue="true" android:title="@string/ai_nonaka" />
           <CheckBoxPreference android:key="sayyou_1" android:defaultValue="true" android:title="@string/yuka_saitou" />
@@ -38,5 +38,5 @@
           <CheckBoxPreference android:key="sayyou_9" android:defaultValue="true" android:title="@string/ryo_hirohashi" />
           <CheckBoxPreference android:key="sayyou_10" android:defaultValue="true" android:title="@string/mai_aizawa" />
           <CheckBoxPreference android:key="sayyou_11" android:defaultValue="true" android:title="@string/masumi_asano" />
-      </PreferenceScreen>
+      </PreferenceCategory>
 </PreferenceScreen>
