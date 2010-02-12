@@ -6,11 +6,15 @@
 
     <string name="sayyou">Voice Artists</string>
     <string name="sayyou_summary">Voice Artists settings</string>
+
     <string name="settings">Settings</string>
     <string name="time_tone">Time Tone</string>
     <string name="time_tone_summary">Time tone settings</string>
     <string name="wakelock_title">WeakLock</string>
     <string name="wakelock_summary">Don't shift to the standby</string>
+
+    <string name="ignore_silent_title">Ignore Silent Mode</string>
+    <string name="ignore_silent_summary">Enable voice if silent mode.</string>
 
     <string name="prefs_timetone_serif_every">All</string>
     <string name="prefs_timetone_serif">Speech only (15min)</string>

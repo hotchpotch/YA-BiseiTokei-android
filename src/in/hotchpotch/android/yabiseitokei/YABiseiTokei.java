@@ -8,11 +8,13 @@ import java.util.Timer;
 import android.app.Activity;
 import android.app.AlertDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 import android.net.Uri;
@@ -131,15 +133,28 @@ public class YABiseiTokei extends Activity {
                 String time = (String) msg.obj;
                 mImageLoader.updateImage(time);
 
+                if (!mPrefs.getBoolean("ignore_silent", false)) {
+                    // サイレント
+                    if (isSilent()) {
+                        return;
+                    }
+                }
+
                 int actId = Utils.detectAct(time);
                 boolean say = mPrefs.getBoolean(String.format("sayyou_%d", actId), true);
                 Log.i(TAG, String.format("%s: ActID:%d Sayyou:%s Say?:%b", time, actId, getResources().getStringArray( R.array.acts )[actId], say));
+                
                 if (say) {
                     playVoice(time);
                 }
             }
         };
         timer.schedule(new ImageUpdateTask(handler), 0, 1000);
+    }
+
+    private boolean isSilent() {
+        int audioMode = ((AudioManager) getSystemService(Context.AUDIO_SERVICE)).getRingerMode();
+        return audioMode == AudioManager.RINGER_MODE_SILENT || audioMode == AudioManager.RINGER_MODE_VIBRATE;
     }
 
     private void timerCancel() {

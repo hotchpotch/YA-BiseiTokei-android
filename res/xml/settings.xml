@@ -6,6 +6,12 @@
 			android:defaultValue="true"
 			android:title="@string/wakelock_title"
 			android:summary="@string/wakelock_summary" />
+
+  		<CheckBoxPreference
+			android:key="ignore_silent"
+			android:defaultValue="false"
+			android:title="@string/ignore_silent_title"
+			android:summary="@string/ignore_silent_summary" />
   		<ListPreference
 			android:key="time_tone"
 			android:defaultValue="serif_every"

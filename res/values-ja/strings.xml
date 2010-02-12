@@ -13,11 +13,13 @@
     <string name="wakelock_title">スタンバイにしない</string>
     <string name="wakelock_summary">アプリ起動中は、スタンバイに移行しません</string>
 
+    <string name="ignore_silent_title">いつでも時報を再生</string>
+    <string name="ignore_silent_summary">サイレントモード時にも時報を再生します</string>
+
     <string name="prefs_timetone_serif_every">セリフ+毎分</string>
     <string name="prefs_timetone_serif">セリフのみ(15分おき)</string>
     <string name="prefs_timetone_every">毎分</string>
     <string name="prefs_timetone_none">無し</string>
-
 
     <string name="ai_nonaka">野中藍</string>
     <string name="yuka_saitou">斉藤佑圭</string>
