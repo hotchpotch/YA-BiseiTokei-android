@@ -31,6 +31,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -53,9 +54,10 @@ public class YABiseiTokei extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         dirExists = (new File(BISEI_APP_DIR)).exists();
         if (dirExists) {
-            // setContentView(R.layout.main);
-            mImageLoader = new ImageLoader(this);
-            setContentView(mImageLoader);
+            setContentView(R.layout.main); // new ImageLoader(this);
+            mImageLoader = (ImageLoader) findViewById(R.id.image); // new ImageLoader(this);
+            // mImageLoader = new ImageLoader(this);
+            // setContentView(mImageLoader);
         } else {
             new AlertDialog.Builder(this)
                .setMessage(String.format(getString(R.string.dir_not_found), BISEI_APP_DIR))
@@ -70,11 +72,30 @@ public class YABiseiTokei extends Activity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        showInfo();
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         new MenuInflater(this).inflate(R.menu.main_menu, menu);
 
         return true;
+    }
+
+    @Override
+    public void onOptionsMenuClosed(Menu menu) {
+        hideInfo();
+    }
+
+    public void showInfo() {
+        findViewById(R.id.info).setVisibility(View.VISIBLE);
+    }
+
+    public void hideInfo() {
+        findViewById(R.id.info).setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -131,6 +152,8 @@ public class YABiseiTokei extends Activity {
             @Override
 			public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
+                Log.i(TAG, "LLLLLLLLLLLLLLL");
+
                 mImageLoader.updateImage(time);
 
                 if (!mPrefs.getBoolean("ignore_silent", false)) {

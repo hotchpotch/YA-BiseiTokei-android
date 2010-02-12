@@ -13,16 +13,16 @@ import android.content.Context;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
 
 
+import android.util.AttributeSet;
 import android.util.Log;
 
-import android.view.View;
+import android.widget.ImageView;
 
-public class ImageLoader extends View {
-    private static final String TAG = "ImageLoader";
+public class ImageLoader extends ImageView {
+    private static final String TAG = "YABiseiTokei";
     private Bitmap mImage;
     private ExecutorService mExecutor = Executors.newSingleThreadExecutor();
     
@@ -31,22 +31,35 @@ public class ImageLoader extends View {
         setBackgroundColor(Color.BLACK);
     }
 
+    public ImageLoader(Context context, AttributeSet attr) {
+        super(context, attr);
+        setBackgroundColor(Color.BLACK);
+    }
+
     public void updateImage(String time) {
         mImage = null;
         final String path = getPhotoPath(time);
         mExecutor.execute(new Runnable() { public void run() {
+            Log.d(TAG, "turead");
             if (Thread.interrupted()) {
                 return;
             }
+            Log.d(TAG, "turead2");
             InputStream fis = null;
             try {
                 fis = new BufferedInputStream(new FileInputStream(path));
                 mImage = BitmapFactory.decodeStream(fis);
-                post(new Runnable() { 
+            Log.d(TAG, "turead32");
+                postDelayed(new Runnable() { 
                     public void run() {
-                        invalidate();
+            Log.d(TAG, String.format("turead32 - %b", mImage));
+                        if (mImage != null) {
+                            Log.d(TAG, "setImage!");
+                            setImageBitmap(mImage);
+
+                        }
                     }
-                });
+                }, 10);
             } catch (IOException e) {
                 Log.e(TAG, String.format("error file, %s", e.getMessage()), e);
             } finally {
@@ -66,12 +79,13 @@ public class ImageLoader extends View {
         return String.format("%sPhotos/%s.jpg", YABiseiTokei.BISEI_APP_DIR, time);
     }
 
-  @Override
-      protected void onDraw(final Canvas canvas) {
-          if (mImage != null) {
-              canvas.drawBitmap(mImage,0,0,null);
-          }
-      }
+  // @Override
+  //     protected void onDraw(final Canvas canvas) {
+  //         if (mImage != null) {
+  //             setImageBitmap(mImage);
+  //             // canvas.drawBitmap(mImage,0,0,null);
+  //         }
+  //     }
 }
 
 
