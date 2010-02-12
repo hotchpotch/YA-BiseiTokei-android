@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World!</string>
-    <string name="app_name">YABiseiTokei</string>
+    <string name="app_name">Yet Another BiseiTokei</string>
     <string name="dir_not_found">Dir %s not found.</string>
 
     <string name="sayyou">Voice Artists</string>

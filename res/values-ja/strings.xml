@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World!</string>
-    <string name="app_name">YABiseiTokei</string>
+    <string name="app_name">Yet Another 美声時計</string>
     <string name="dir_not_found">ディレクトリ %s が見つかりません。</string>
 
     <string name="sayyou">声優</string>
