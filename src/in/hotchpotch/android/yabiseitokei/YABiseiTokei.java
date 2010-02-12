@@ -35,6 +35,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import android.widget.TextView;
+
 public class YABiseiTokei extends Activity {
     public static final String TAG = "YABiseiTokei";
     public static final String BISEI_APP_DIR = "/sdcard/bisei-tokei/Payload/BiseiTokei.app/";
@@ -56,9 +58,8 @@ public class YABiseiTokei extends Activity {
         if (dirExists) {
             setContentView(R.layout.main); // new ImageLoader(this);
             mImageLoader = (ImageLoader) findViewById(R.id.image); // new ImageLoader(this);
-            // mImageLoader = new ImageLoader(this);
-            // setContentView(mImageLoader);
         } else {
+
             new AlertDialog.Builder(this)
                .setMessage(String.format(getString(R.string.dir_not_found), BISEI_APP_DIR))
                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -152,8 +153,11 @@ public class YABiseiTokei extends Activity {
             @Override
 			public void handleMessage(Message msg) {
                 String time = (String) msg.obj;
-                Log.i(TAG, "LLLLLLLLLLLLLLL");
 
+                int actId = Utils.detectAct(time);
+                ((TextView)findViewById(R.id.title_sayyou)).setText(getResources().getStringArray( R.array.acts )[actId]);
+
+                Log.d(TAG, "--- to update image");
                 mImageLoader.updateImage(time);
 
                 if (!mPrefs.getBoolean("ignore_silent", false)) {
@@ -163,7 +167,6 @@ public class YABiseiTokei extends Activity {
                     }
                 }
 
-                int actId = Utils.detectAct(time);
                 boolean say = mPrefs.getBoolean(String.format("sayyou_%d", actId), true);
                 Log.i(TAG, String.format("%s: ActID:%d Sayyou:%s Say?:%b", time, actId, getResources().getStringArray( R.array.acts )[actId], say));
                 
@@ -208,7 +211,7 @@ public class YABiseiTokei extends Activity {
     private void playSerif(String time) {
         File file = new File(String.format("%sSounds/Serif/%s.mp3", YABiseiTokei.BISEI_APP_DIR, time));
         if (file.canRead()) {
-            Uri uri = Uri.parse(file.toURI().toString());
+            Uri uri = Uri.fromFile(file);
             MediaPlayer mp = MediaPlayer.create(this, uri);
             mp.start();
         } else {
@@ -218,7 +221,7 @@ public class YABiseiTokei extends Activity {
 
     private void playTimeTone(final String time, boolean withSerif) {
         File file = new File(String.format("%sSounds/Time/%s.mp3", YABiseiTokei.BISEI_APP_DIR, time));
-        Uri uri = Uri.parse(file.toURI().toString());
+        Uri uri = Uri.fromFile(file);
         MediaPlayer mp = MediaPlayer.create(this, uri);
         if (withSerif) {
             mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

@@ -29,7 +29,7 @@
         android:padding="5sp">
 
         <TextView  
-            android:id="@+id/title"
+            android:id="@+id/title_sayyou"
     
             android:layout_width="fill_parent"
             android:layout_height="25sp"
@@ -37,6 +37,6 @@
             
             android:textSize="20sp"
 
-            android:text="test" />
+            android:text="" />
     </RelativeLayout>
 </FrameLayout>

@@ -7,6 +7,8 @@
     <string name="sayyou">声優</string>
     <string name="sayyou_summary">声優ごとの音声オンオフ設定</string>
 
+    <string name="time_tone_play">時報の再生</string>
+
     <string name="settings">設定</string>
     <string name="time_tone">時報</string>
     <string name="time_tone_summary">時報(音声)の設定です</string>
@@ -14,7 +16,7 @@
     <string name="wakelock_summary">アプリ起動中は、スタンバイに移行しません</string>
 
     <string name="ignore_silent_title">いつでも時報を再生</string>
-    <string name="ignore_silent_summary">サイレントモード時にも時報を再生します</string>
+    <string name="ignore_silent_summary">サイレントモード時にも時報を再生します。</string>
 
     <string name="prefs_timetone_serif_every">セリフ+毎分</string>
     <string name="prefs_timetone_serif">セリフのみ(15分おき)</string>
